@@ -422,3 +422,440 @@ def subString(myStr):
 
 subString('Abubakar')
 
+"""# **MEDIUM LEVEL (25 QUESTIONS)**
+
+**28.	Implement a program to find the GCD and LCM of two numbers.**
+"""
+
+def GCD(num1,num2):
+  listNum1 = []
+  listNum2 = []
+  for i in range(1,num1+1):
+    if num1 % i == 0:
+      listNum1.append(i)
+  for i in range(1,num2+1):
+    if num2 % i == 0:
+      listNum2.append(i)
+
+  #approach 1
+  # for i in range(len(listNum1)):
+  #   if listNum1[i] in listNum2:
+  #     comList.append(listNum1[i])
+
+  # approach 2
+  # for i in range(len(listNum1)):
+  #   for j in range(len(listNum2)):
+  #     if listNum1[i] == listNum2[j]:
+  #       if listNum1[i] not in comList:
+  #         comList.append(listNum1[i])
+  #       else:
+  #         pass
+
+  # as i already make a function by using approach 2 in problem 22 (easy) which returning
+  # the list of common in 2 different list so i am going to use that function
+  # becuase function are reusable that why i made the function so now i am going to use my functions findCommons
+
+  common = findCommons(listNum1,listNum2)
+  return max(common)
+
+def LCM(num1,num2):
+  return (num1 * num2) // GCD(num1,num2)
+
+LCM(12,15)
+
+# approach # 02
+def GCD2(num1,num2):
+  list1 = [i for i in range(1, num1+1) if num1 % i == 0]
+  list2 = [i for i in range(1, num2+1) if num2 % i == 0]
+  common2 = list(set(list1) & set(list2))
+  return max(common2)
+
+def LCM2(num1,num2):
+  return (num1 * num2) // GCD2(num1,num2)
+
+LCM2(12,15)
+
+"""**29.	Find all pairs in an array whose sum is equal to a target number.**"""
+
+def getSumPairs(target, listOfNum):
+  sumPairs = []
+  for i in range (len(listOfNum)):
+    for j in range(i+1,len(listOfNum)):
+      if listOfNum[i] + listOfNum[j] == target:
+        sumPairs.append((listOfNum[i],listOfNum[j]))
+
+  return sumPairs
+
+
+getSumPairs(7,[1,2,3,4])
+
+"""**30.	Remove all duplicate characters from a string.**"""
+
+def removeDuplicate(myStr):
+  rem = ""
+  for i in myStr.lower():
+    if i not in rem:
+      rem += i
+  return rem
+
+removeDuplicate("PrograMming")
+
+"""**31.	Implement a function to flatten a nested list.**"""
+
+def myFlatten(yourList):
+  myFlat = []
+  for i in yourList:
+    if isinstance(i,list):
+        myFlat.extend(myFlatten(i))
+    else:
+      myFlat.append(i)
+  return myFlat
+
+myFlatten([[1,2],2,3,4,5,[6,4,[1,2,[11,14]]]])
+
+#quick practice of same
+def myFlatten2(arr):
+  myFlat = []
+  for i in arr:
+    if isinstance(i,list):
+      myFlat.extend(myFlatten2[i])
+    else:
+      myFlat.append(i)
+  return myFlat
+
+"""**Tricky Follow Up Task: Write a recursive function that reverses a string without using loops or slicing.**"""
+
+def recRevStr(myStr):
+    if len(myStr) <= 1:       # Base case
+        return myStr
+    return myStr[-1] + recRevStr(myStr[:-1])  # Last char + reversed rest
+
+# Test
+print(recRevStr("Python"))  # Output: "nohtyP"
+
+"""**32.	Create a function to count words in a text file.**"""
+
+def wordCountInFile(path):
+    with open(path,"r") as file:
+      content = file.read()
+    return len(content.split())
+wordCountInFile("forRead.txt")
+
+"""**33.	Find the intersection and union of two sets without using built-in methods.**"""
+
+def intersectionAndUnion(set1, set2):
+    union = set1 | set2            # Union using | operator
+    intersect = set1 & set2        # Intersection using & operator
+    print(f"Union: {union}")
+    print(f"Intersection: {intersect}")
+
+mySet = {1, 2, 3, 2, 6, 4, 5}
+mySet1 = {1, 2, 7, 8, 6, 4, 5}
+intersectionAndUnion(mySet, mySet1)
+
+# approach2
+def intersectionAndUnion2(set1, set2):
+  union = {*set1,*set2}
+  intersect = set()
+  for i in set1:
+    for j in set2:
+      if i==j:
+        intersect.add(i)
+  print(f"Union: {union}")
+  print(f"Intersection: {intersect}")
+
+
+mySet = {1, 2, 3,2,6, 4, 5}
+mySet1 = {1, 2,7,8,6, 4, 5}
+intersectionAndUnion(mySet,mySet1)
+
+"""**35.	Write a Python class for a bank account with deposit and withdraw methods.**"""
+
+class BankAccount:
+  def __init__(self,owner,balance):
+    self.owner = owner
+    self.balance = balance
+  def getBalance(self):
+     print(f"{self.owner} current Balance is {self.balance}")
+
+  def deposit(self, amount):
+    if amount > 0:
+      self.balance += amount
+      print(f"Amount Deposited: ", amount)
+    else:
+      print("Insufficient amount or Deposit amount must be positive.")
+  def withDraw(self, amount):
+    if amount > self.balance:
+      print("Insufficient balance")
+    elif amount < 0:
+      print("Amount Must be more than 0.")
+    else:
+      self.balance -= amount
+      print(f"Amount Withdrawal: ", amount)
+
+
+
+account = BankAccount("Abu Bakar",1000)
+account1 = BankAccount("Uzair",500)
+
+
+print(account.owner)
+print(account1.owner)
+account.getBalance()
+account.withDraw(199)
+account.getBalance()
+account1.getBalance()
+
+"""36.	Sort a list of dictionaries by a specific key."""
+
+std = [
+    {"name": "Sara", "age": 26},
+    {"name": "Alex", "age": 32},
+    {"name": "John", "age": 25},
+    {"name": "Uzair", "age": 25},
+    {"name": "Marnie", "age": 22},
+    {"name": "Edwill", "age": 21},
+]
+for i in range(len(std)):
+  min = i
+  for j in range(i,len(std)):
+    if std[min]['age'] > std[j]['age']:
+      min = j
+  std[i],std[min] = std[min],std[i]
+print(std)
+
+# QUICK REVISION
+liste = [1,2,3,4,5,5,6,0,9,8,1,2]
+for i in range(len(liste)):
+  min= liste[i]
+  idx = i
+  c = i
+  for j in range(i,len(liste)):
+    if min > liste[j]:
+      min = liste[j]
+      idx= c
+    c+=1
+  temp = liste[i]
+  liste[idx]= temp
+  liste[i] = min
+
+print(liste)
+#APPROCH 2
+liste2 = [1,2,3,4,5,5,6,0,9,8,1,2]
+for i in range(len(liste2)):
+  min = i
+  for j in range(i,len(liste2)):
+    if liste2[min] > liste2[j]:
+      min = j
+  liste2[i], liste2[min] = liste2[min],liste2[i]
+print(liste2)
+
+firstName = "Abubakar"
+lastName = 'Ansari'
+firstName,lastName = lastName,firstName
+print(lastName)
+
+"""**37.	Write a Python function to check if two strings are anagrams**"""
+
+def anagram(word1,word2):
+  if len(word1) == 0 or len(word2) == 0:
+    print("One of the words is empty")
+  elif len(word1) != len(word2):
+    print("May be 2 different word length doesn't match")
+  else:
+    if all(char.lower() in word2 for char in word1):
+        print("Anagram")
+    else:
+        print("Same length but different Word character!")
+
+anagram('aab','ab')
+# possibility 1: aesd   # possibility 1: saed   # possibility 1: asds   # possibility 1: asds
+# possibility 2: ased   # possibility 2: sdea   # possibility 2: asds   # possibility 2: asds
+# possibility 3: ades   # possibility 3: seda   # possibility 3: asds   # possibility 3: asds
+# possibility 4: adse   # possibility 4: sdae   # possibility 4: asds   # possibility 4: asds
+# possibility 5: asde   # possibility 5: sead   # possibility 4: asds   # possibility 4: asds
+
+#approach 2
+def anagram(word1, word2):
+    word1 = word1.lower()
+    word2 = word2.lower()
+
+    if len(word1) != len(word2):
+        print("Words are of different lengths, cannot be anagrams")
+        return False
+
+    if sorted(word1) == sorted(word2):
+        print(f'"{word1}" and "{word2}" are anagrams')
+        return True
+    else:
+        print(f'"{word1}" and "{word2}" are NOT anagrams')
+        return False
+
+anagram("Gum", "Mug")       # True
+anagram("Listen", "Silent") # True
+anagram("Hello", "World")   # False
+anagram("Gum", "Mugs")      # False
+
+"""**38.	Implement a program to find the longest word in a sentence.**"""
+
+def longWord(sentence):
+  newSent = sentence.split()
+  word = ""
+  for w in newSent:
+    if len(w) > len(word):
+      word = w
+
+  print(f"Longest Word in the sentence is {word} and length is {len(word)}")
+
+longWord("AbubakarAnsari I AbubakarAnsariBecomeDataAnayst am Abubakar")
+
+def firstNonRepeating(myStr):
+  myData = dict()
+  myStr = myStr.lower()
+  char = ""
+  for i in range(len(myStr)):
+    c = 0
+    for j in range(len(myStr)):
+      if myStr[i] == myStr[j]:
+        c+=1
+        char = myStr[i]
+    myData[myStr[i]] = c
+    if c == 1:
+      print(f"First Non Repeating Character {char}")
+      break
+
+  print(myData)
+
+firstNonRepeating("Abubakar")
+
+"""**41.	Implement a program to count how many times each character appears in a string (case insensitive).**"""
+
+def charApperance(myStr):
+  myStr = myStr.lower()
+  myData = dict()
+  for i in myStr:
+    if i in myData:
+      myData[i] += 1
+    else:
+      myData[i] = 1
+
+
+  print(myData)
+
+charApperance("Abubakar")
+
+"""**42.	Write a function to calculate the sum of all numbers in a nested list.**"""
+
+def sumOfAllNestedList (yourList):
+  total = 0
+  for i in yourList:
+    if isinstance(i,list):
+      total += sumOfAllNestedList(i)
+    else:
+      total += i
+  return total
+
+sumOfAllNestedList([1,2,4,[1,2,[2,1,[5,1,21,21,45,6],2],323,2],9,0])
+
+"""**43.	Implement a binary search algorithm.**"""
+
+def binarySearch(arr,x):
+  low = 0
+  high = len(arr)-1
+  while low <= high:
+    mid = (low + high) // 2
+    if arr[mid] == x:
+      return mid
+    elif arr[mid] < x:
+      low = mid + 1
+    else:
+      high = mid-1
+  return -1
+
+arr = [2, 3, 4, 11, 10, 40]
+x = 10
+
+result = binarySearch(arr, x)
+
+if result != -1:
+  print("Element is present at index", result)
+else:
+  print("Element is not present in array")
+
+"""**44.	Generate random passwords of given length.**"""
+
+import random
+import string
+def randPassGenerator(length):
+  if length <= 5:
+    print("Password length must be greater than 5")
+    return
+  upper = random.choice(string.ascii_uppercase)
+  lower = random.choice(string.ascii_lowercase)
+  digit = random.choice(string.digits)
+  special = random.choice(string.punctuation)
+
+  specialChar = string.ascii_letters + string.digits + string.punctuation
+  rem = "".join(random.choice(specialChar) for _ in range(length-4))
+  passChar = list(upper+lower+digit+special+rem)
+  random.shuffle(passChar)
+  password = "".join(passChar)
+  print(f"Your Password is: {password}")
+
+
+randPassGenerator(10)
+
+"""**45.	Implement a Caesar cipher for text encryption and decryption.**"""
+
+def ceaserCipher(text, shift):
+  result = ""
+  for char in text:
+    if char.isalpha():
+      if char.isupper():
+        base = ord("A")
+      else:
+        base = ord("a")
+
+      result += chr((ord(char) - base + shift) % 26 + base)
+    else:
+      result+=char
+  return result
+
+plainText = "Hello"
+shift = 3
+encrypted = ceaserCipher(plainText,shift)
+decrypted = ceaserCipher(encrypted,-shift)
+
+print(f"The Plain Text is: {plainText}")
+print(f"The Encrypted Text is: {encrypted}")
+print(f"The Decrypted Text is: {decrypted}")
+
+"""**46.	Create a decorator that measures the execution time of a function**"""
+
+def greatingFunction():
+  print("Hello World")
+
+import time
+
+def decoratorFunc(func):
+  def wrapperFunc():
+    print("Start:")
+    start = time.time()
+    func()
+    end = time.time()
+    executionTime = end - start
+    print(f"The total execution time of the function is {executionTime:.6f} seconds: \n")
+  return wrapperFunc
+
+decorated = decoratorFunc(greatingFunction)
+decorated()
+
+print("x---------SLOW FUNCTION---------x \n")
+
+@decoratorFunc
+def slow_function():
+    for i in range(1000000):
+      pass
+
+slow_function()
+

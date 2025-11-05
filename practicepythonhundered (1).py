@@ -513,6 +513,16 @@ def myFlatten(yourList):
 
 myFlatten([[1,2],2,3,4,5,[6,4,[1,2,[11,14]]]])
 
+#quick practice of same
+def myFlatten2(arr):
+  myFlat = []
+  for i in arr:
+    if isinstance(i,list):
+      myFlat.extend(myFlatten2[i])
+    else:
+      myFlat.append(i)
+  return myFlat
+
 """**Tricky Follow Up Task: Write a recursive function that reverses a string without using loops or slicing.**"""
 
 def recRevStr(myStr):
@@ -596,9 +606,313 @@ account.withDraw(199)
 account.getBalance()
 account1.getBalance()
 
-student = [
-    {"name": "Sara", "age": 20},
-    {"name": "Ali", "age": 22},
-    {"name": "John", "age": 25}
+"""36.	Sort a list of dictionaries by a specific key."""
+
+std = [
+    {"name": "Sara", "age": 26},
+    {"name": "Alex", "age": 32},
+    {"name": "John", "age": 25},
+    {"name": "Uzair", "age": 25},
+    {"name": "Marnie", "age": 22},
+    {"name": "Edwill", "age": 21},
 ]
+for i in range(len(std)):
+  min = i
+  for j in range(i,len(std)):
+    if std[min]['age'] > std[j]['age']:
+      min = j
+  std[i],std[min] = std[min],std[i]
+print(std)
+
+# QUICK REVISION
+liste = [1,2,3,4,5,5,6,0,9,8,1,2]
+for i in range(len(liste)):
+  min= liste[i]
+  idx = i
+  c = i
+  for j in range(i,len(liste)):
+    if min > liste[j]:
+      min = liste[j]
+      idx= c
+    c+=1
+  temp = liste[i]
+  liste[idx]= temp
+  liste[i] = min
+
+print(liste)
+#APPROCH 2
+liste2 = [1,2,3,4,5,5,6,0,9,8,1,2]
+for i in range(len(liste2)):
+  min = i
+  for j in range(i,len(liste2)):
+    if liste2[min] > liste2[j]:
+      min = j
+  liste2[i], liste2[min] = liste2[min],liste2[i]
+print(liste2)
+
+firstName = "Abubakar"
+lastName = 'Ansari'
+firstName,lastName = lastName,firstName
+print(lastName)
+
+"""**37.	Write a Python function to check if two strings are anagrams**"""
+
+def anagram(word1,word2):
+  if len(word1) == 0 or len(word2) == 0:
+    print("One of the words is empty")
+  elif len(word1) != len(word2):
+    print("May be 2 different word length doesn't match")
+  else:
+    if all(char.lower() in word2 for char in word1):
+        print("Anagram")
+    else:
+        print("Same length but different Word character!")
+
+anagram('aab','ab')
+# possibility 1: aesd   # possibility 1: saed   # possibility 1: asds   # possibility 1: asds
+# possibility 2: ased   # possibility 2: sdea   # possibility 2: asds   # possibility 2: asds
+# possibility 3: ades   # possibility 3: seda   # possibility 3: asds   # possibility 3: asds
+# possibility 4: adse   # possibility 4: sdae   # possibility 4: asds   # possibility 4: asds
+# possibility 5: asde   # possibility 5: sead   # possibility 4: asds   # possibility 4: asds
+
+#approach 2
+def anagram(word1, word2):
+    word1 = word1.lower()
+    word2 = word2.lower()
+
+    if len(word1) != len(word2):
+        print("Words are of different lengths, cannot be anagrams")
+        return False
+
+    if sorted(word1) == sorted(word2):
+        print(f'"{word1}" and "{word2}" are anagrams')
+        return True
+    else:
+        print(f'"{word1}" and "{word2}" are NOT anagrams')
+        return False
+
+anagram("Gum", "Mug")       # True
+anagram("Listen", "Silent") # True
+anagram("Hello", "World")   # False
+anagram("Gum", "Mugs")      # False
+
+"""**38.	Implement a program to find the longest word in a sentence.**"""
+
+def longWord(sentence):
+  newSent = sentence.split()
+  word = ""
+  for w in newSent:
+    if len(w) > len(word):
+      word = w
+
+  print(f"Longest Word in the sentence is {word} and length is {len(word)}")
+
+longWord("AbubakarAnsari I AbubakarAnsariBecomeDataAnayst am Abubakar")
+
+def firstNonRepeating(myStr):
+  myData = dict()
+  myStr = myStr.lower()
+  char = ""
+  for i in range(len(myStr)):
+    c = 0
+    for j in range(len(myStr)):
+      if myStr[i] == myStr[j]:
+        c+=1
+        char = myStr[i]
+    myData[myStr[i]] = c
+    if c == 1:
+      print(f"First Non Repeating Character {char}")
+      break
+
+  print(myData)
+
+firstNonRepeating("Abubakar")
+
+"""**41.	Implement a program to count how many times each character appears in a string (case insensitive).**"""
+
+def charApperance(myStr):
+  myStr = myStr.lower()
+  myData = dict()
+  for i in myStr:
+    if i in myData:
+      myData[i] += 1
+    else:
+      myData[i] = 1
+
+
+  print(myData)
+
+charApperance("Abubakar")
+
+"""**42.	Write a function to calculate the sum of all numbers in a nested list.**"""
+
+def sumOfAllNestedList (yourList):
+  total = 0
+  for i in yourList:
+    if isinstance(i,list):
+      total += sumOfAllNestedList(i)
+    else:
+      total += i
+  return total
+
+sumOfAllNestedList([1,2,4,[1,2,[2,1,[5,1,21,21,45,6],2],323,2],9,0])
+
+"""**43.	Implement a binary search algorithm.**"""
+
+def binarySearch(arr,x):
+  low = 0
+  high = len(arr)-1
+  while low <= high:
+    mid = (low + high) // 2
+    if arr[mid] == x:
+      return mid
+    elif arr[mid] < x:
+      low = mid + 1
+    else:
+      high = mid-1
+  return -1
+
+arr = [2, 3, 4, 11, 10, 40]
+x = 10
+
+result = binarySearch(arr, x)
+
+if result != -1:
+  print("Element is present at index", result)
+else:
+  print("Element is not present in array")
+
+"""**44.	Generate random passwords of given length.**"""
+
+import random
+import string
+def randPassGenerator(length):
+  if length <= 5:
+    print("Password length must be greater than 5")
+    return
+  upper = random.choice(string.ascii_uppercase)
+  lower = random.choice(string.ascii_lowercase)
+  digit = random.choice(string.digits)
+  special = random.choice(string.punctuation)
+
+  specialChar = string.ascii_letters + string.digits + string.punctuation
+  rem = "".join(random.choice(specialChar) for _ in range(length-4))
+  passChar = list(upper+lower+digit+special+rem)
+  random.shuffle(passChar)
+  password = "".join(passChar)
+  print(f"Your Password is: {password}")
+
+
+randPassGenerator(10)
+
+"""**45.	Implement a Caesar cipher for text encryption and decryption.**"""
+
+def ceaserCipher(text, shift):
+  result = ""
+  for char in text:
+    if char.isalpha():
+      if char.isupper():
+        base = ord("A")
+      else:
+        base = ord("a")
+
+      result += chr((ord(char) - base + shift) % 26 + base)
+    else:
+      result+=char
+  return result
+
+plainText = "Hello"
+shift = 3
+encrypted = ceaserCipher(plainText,shift)
+decrypted = ceaserCipher(encrypted,-shift)
+
+print(f"The Plain Text is: {plainText}")
+print(f"The Encrypted Text is: {encrypted}")
+print(f"The Decrypted Text is: {decrypted}")
+
+"""**46.	Create a decorator that measures the execution time of a function**"""
+
+def greatingFunction():
+  print("Hello World")
+
+import time
+
+def decoratorFunc(func):
+  def wrapperFunc():
+    print("Start:")
+    start = time.time()
+    func()
+    end = time.time()
+    executionTime = end - start
+    print(f"The total execution time of the function is {executionTime:.6f} seconds: \n")
+  return wrapperFunc
+
+decorated = decoratorFunc(greatingFunction)
+decorated()
+
+print("x---------SLOW FUNCTION---------x \n")
+
+@decoratorFunc
+def slow_function():
+    for i in range(1000000):
+      pass
+
+slow_function()
+
+"""**47.	Count the number of uppercase and lowercase letters in a string.**"""
+
+def numUpperLower(myStr):
+  myString = "".join(myStr.split())
+  print(myString)
+  upper = 0
+  lower = 0
+  for char in myString:
+    if char.isupper():
+      upper+= 1
+    else:
+
+      lower +=1
+  print(f"Total number of upper {upper} and lower {lower}")
+
+numUpperLower("AbubAKar is my name")
+
+"""**48.	Find the most frequent element in a list.**"""
+
+def frequentElement(myList):
+  collection = dict()
+  for el in myList:
+    if el in collection:
+      collection[el] +=1
+    else:
+      collection[el] = 1
+  res = max(collection, key=collection.get)
+  freq = collection[res]
+  return (res, freq)
+
+frequentElement([1,13,13,4,5,6,1,331,12,11,1,13,13])
+
+"""**49.	Reverse the order of words in a sentence**"""
+
+def reverseSentence(sentence):
+  split = sentence.split()
+  split.reverse()
+  res = " ".join(split)
+  return res
+
+reverseSentence("I am Abubakar")
+
+"""**50.	Find the missing number in a sequence 1 to n.**"""
+
+def missingValue(providedList):
+  providedList.sort()
+  minVal = providedList[0]
+  maxVal = max(providedList)
+  generatedSet = set(providedList)
+  missing = []
+  for i in range(minVal, maxVal):
+    if i not in generatedSet:
+      missing.append(i)
+  return missing
+
+missingValue([10,2,2,4,5])
 

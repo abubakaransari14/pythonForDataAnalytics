@@ -859,3 +859,180 @@ def slow_function():
 
 slow_function()
 
+"""**47.	Count the number of uppercase and lowercase letters in a string.**"""
+
+def numUpperLower(myStr):
+  myString = "".join(myStr.split())
+  print(myString)
+  upper = 0
+  lower = 0
+  for char in myString:
+    if char.isupper():
+      upper+= 1
+    else:
+
+      lower +=1
+  print(f"Total number of upper {upper} and lower {lower}")
+
+numUpperLower("AbubAKar is my name")
+
+"""**48.	Find the most frequent element in a list.**"""
+
+def frequentElement(myList):
+  collection = dict()
+  for el in myList:
+    if el in collection:
+      collection[el] +=1
+    else:
+      collection[el] = 1
+  res = max(collection, key=collection.get)
+  freq = collection[res]
+  return (res, freq)
+
+frequentElement([1,13,13,4,5,6,1,331,12,11,1,13,13])
+
+"""**49.	Reverse the order of words in a sentence**"""
+
+def reverseSentence(sentence):
+  split = sentence.split()
+  split.reverse()
+  res = " ".join(split)
+  return res
+
+reverseSentence("I am Abubakar")
+
+"""**50.	Find the missing number in a sequence 1 to n.**"""
+
+def missingValue(providedList):
+  providedList.sort()
+  minVal = providedList[0]
+  maxVal = max(providedList)
+  generatedSet = set(providedList)
+  missing = []
+  for i in range(minVal, maxVal):
+    if i not in generatedSet:
+      missing.append(i)
+  return missing
+
+missingValue([10,2,2,4,5])
+
+"""**Challenge Question:** *Replace all negative numbers in an array with zero.*"""
+
+def replaceInArr(yourList, n):
+  for i in range(len(yourList)):
+    # print(yourList[i])
+    if yourList[i]<0:
+      yourList[i] = n
+  return yourList
+
+
+replaceInArr([1,2,3,-2,-4,52,1,-12,21,-5],0)
+
+"""**51.	Check if a given string has balanced parentheses.**"""
+
+def isBalanced(s):
+  count = 0
+  for char in s:
+    if char == "(":
+      count += 1
+    elif char == ")":
+      count -=1
+    if count < 0:
+      print("Unbalanced: closing bracket appears before opening one!")
+      return
+
+  if count == 0:
+    print(f"Perfectly Balanced Opening and Closing")
+  else:
+    print("Unbalanced: more opening brackets than closing ones.")
+
+
+isBalanced("(((()))))")
+
+"""**52.	Check if a number is perfect (sum of divisors = number).**"""
+
+def perfectSumDivisor(n):
+  divisor = []
+  for i in range(1, n):
+    if n % i == 0:
+      divisor.append(i)
+
+  sumDivisior = sum(divisor)
+  if sumDivisior == n:
+    print(f"Number {n} is perfect sum of divisor {sumDivisior}")
+  else:
+    print(f"Number {n} is not perfect sum of divisor {sumDivisior}")
+
+perfectSumDivisor(6)
+perfectSumDivisor(28)
+perfectSumDivisor(32)
+perfectSumDivisor(25)
+
+"""**53.	Implement a mini calculator using functions.**"""
+
+def add(a, b):
+    return a + b
+
+def subtract(a, b):
+    return a - b
+
+def multiply(a, b):
+    return a * b
+
+def divide(a, b):
+    if b != 0:
+        return a / b
+    else:
+        return "Error: Cannot divide by zero!"
+
+def miniCalculator ():
+  print("Select operation:")
+  print("1. Add")
+  print("2. Subtract")
+  print("3. Multiply")
+  print("4. Divide")
+
+
+  while True:
+      choice = input("Enter choice (1/2/3/4 and q for quit): ")
+      keys = "1234q"
+      if choice in keys:
+        if choice.lower() == 'q':
+         print("Calculator exited.")
+         break
+        num1 = input("Enter first number: ")
+        num2 = input("Enter second number: ")
+        if choice == '1':
+          print(f"Result: {add(int(num1), int(num2))}")
+        elif choice == '2':
+          print(f"Result: {subtract(int(num1), int(num2))}")
+        elif choice == '3':
+          print(f"Result: {multiply(int(num1), int(num2))}")
+        elif choice == '4':
+          print(f"Result: {divide(int(num1), int(num2))}")
+      else:
+        print("Invalid Input!")
+
+      print()
+
+
+
+
+miniCalculator()
+
+"""**54.	Simulate a dice roll using random numbers.**"""
+
+import random
+def roll():
+  return random.randint(1,6)
+
+while True:
+    input("Press Enter to roll the dice")
+    number = roll()
+    print(f"You rolled a {number}!")
+
+    choice = input("Roll again? (y/n): ")
+    if choice.lower() != 'y':
+        print("Thanks for playing!")
+        break
+

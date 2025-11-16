@@ -32,7 +32,6 @@ EASY LEVEL (25 QUESTIONS)
 23.	Count occurrences of a word in a sentence.
 24.	Find the smallest missing number in a sorted list.
 25.	Print all substrings of a given string.
-MEDIUM LEVEL (25 QUESTIONS) 
 26.	Implement a program to find the GCD and LCM of two numbers.
 27.	Find all pairs in an array whose sum is equal to a target number.
 28.	Remove all duplicate characters from a string.

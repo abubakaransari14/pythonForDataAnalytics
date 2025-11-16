@@ -32,3 +32,29 @@ EASY LEVEL (25 QUESTIONS)
 23.	Count occurrences of a word in a sentence.
 24.	Find the smallest missing number in a sorted list.
 25.	Print all substrings of a given string.
+MEDIUM LEVEL (25 QUESTIONS) 
+26.	Implement a program to find the GCD and LCM of two numbers.
+27.	Find all pairs in an array whose sum is equal to a target number.
+28.	Remove all duplicate characters from a string.
+29.	Implement a function to flatten a nested list.
+30.	Create a function to count words in a text file.
+31.	Find the intersection and union of two sets without using built-in methods.
+32.	Write a Python class for a bank account with deposit and withdraw methods.
+33.	Sort a list of dictionaries by a specific key.
+34.	Check if two strings are anagrams.
+35.	Implement a binary search algorithm.
+36.	Generate random passwords of given length.
+37.	Implement a program to rotate elements of a list k times.
+38.	Find the first non-repeating character in a string.
+39.	Implement a Caesar cipher for text encryption and decryption.
+40.	Find the longest word in a given sentence.
+41.	Create a decorator that measures the execution time of a function.
+42.	Count the number of uppercase and lowercase letters in a string.
+43.	Find the most frequent element in a list.
+44.	Implement matrix addition and multiplication.
+45.	Reverse the order of words in a sentence.
+46.	Check if a given string has balanced parentheses.
+47.	Implement a mini calculator using functions.
+48.	Find the missing number in a sequence 1 to n.
+49.	Check if a number is perfect (sum of divisors = number).
+50.	Simulate a dice roll using random numbers.

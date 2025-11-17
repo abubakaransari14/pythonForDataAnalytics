@@ -1036,3 +1036,68 @@ while True:
         print("Thanks for playing!")
         break
 
+"""**Trying Numpy Broadcasting Here**"""
+
+# listing = [1,2,4,5,6,78,-9,-3,34]
+# listing[listing < 0] = 0
+# print(listing)
+print("Not Working Masking")
+
+"""***Extra: Comulative Sum:***"""
+
+import random
+arr = [1,3,4,6,6,10,20,5,5,4,3,2,1]
+cumsum =  []
+sum = 0
+for i in range(len(arr)):
+  if i == 0:
+    sum = arr[i]
+    cumsum.append(arr[i])
+  else:
+    sum = sum + arr[i]
+    cumsum.append(sum)
+print(arr)
+print(cumsum)
+
+"""**55.	Implement merge sort and quick sort.**"""
+
+#Merge Sort:
+arr = [22,32,45,12]
+def mergeSort(arr):
+  if len(arr)<=1:
+    return arr
+
+  mid = len(arr)//2
+  left = mergeSort(arr[:mid])
+  right= mergeSort(arr[mid:])
+  return merge(left, right)
+
+def merge(left, right):
+  i = j = 0
+  result = []
+  while i<len(left) and j < len(right): #[22,32] [12,45]
+    if left[i] < right[j]: #32<12, 32<45
+      result.append(left[i])
+      i+=1 #2
+    else:
+      result.append(right[j])
+      j+=1 #1
+  result.extend(left[i:])
+  result.extend(right[j:])
+
+  return result #[12,22,32,45]
+
+print(mergeSort(arr))
+
+#QUICK SORT
+def quickSort(arr):
+  if len(arr)<=1:
+    return arr
+  #[32,22,45,12]
+  pivot = arr[-1]
+  left = [x for x in arr[:-1] if x <= pivot]
+  right = [x for x in arr[:-1] if x > pivot]
+  return quickSort(left) + [pivot] + quickSort(right)
+array = quickSort([32,22,45,12])
+print(array)
+

@@ -1101,3 +1101,44 @@ def quickSort(arr):
 array = quickSort([32,22,45,12])
 print(array)
 
+"""**56.	Write a function that returns the nth prime number.**"""
+
+def isPrime(num):
+  if num<2:
+    return False
+  count = 0
+  for i in range(1,num+1):
+    if num%i == 0:
+      count+=1
+  if count == 2:
+    return True
+  else:
+    return False
+
+def nthPrime(n):
+  counter = 0
+  num = 2
+  while counter < n:
+    if isPrime(num):
+      counter+=1
+      if counter == n:
+        return num
+    num+=1
+
+nthPrime(10)
+
+"""**57.	Create a function that finds all permutations of a string.**"""
+
+#not able to solve by myself -- backtracking
+def permutations(s):
+    if len(s) == 1:
+        return [s]
+    result = []
+    for i in range(len(s)):
+      char = s[i]
+      remaining = s[:i]+s[i+1:]
+      for perm in permutations(remaining):
+        result.append(char+perm)
+    return result
+permutations("abc")
+
